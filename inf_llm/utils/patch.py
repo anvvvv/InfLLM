@@ -163,9 +163,9 @@ def patch_hf(
         if isinstance(m, Attention):
             m._old_forward = m.forward
             m.forward = forward.__get__(m, Attention)
-
+    #apply这个函数是让model中的每一层去调用传入的函数也就是操作
     model.apply(set_forward)
-
+    
     model.model._old_forward = model.model.forward
     model.model.forward = model_forward.__get__(model.model, Model)
 
